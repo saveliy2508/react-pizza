@@ -1,0 +1,72 @@
+.main {
+  padding: 0 15px;
+
+  .sorting {
+    display: flex;
+    justify-content: space-between;
+    margin: 35px 0;
+
+    .sortingLeft {
+      display: flex;
+
+      .sortingButton {
+        cursor: pointer;
+        font-weight: 700;
+        background: #F9F9F9;
+        border-radius: 30px;
+        font-size: 16px;
+        line-height: 40px;
+        text-align: center;
+        letter-spacing: 0.015em;
+        color: #2C2C2C;
+        padding: 0 25px;
+        margin-right: 8px;
+        height: 46px;
+      }
+    }
+
+    .sortingRight {
+
+      .menu {
+        display: flex;
+        cursor: pointer;
+      }
+
+      .subMenu {
+        width: 132px;
+        height: 150px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+        border-radius: 10px;
+        position: absolute;
+        right: 20px;
+        padding: 13px 0;
+
+        p {
+          padding: 3px 15px;
+          display: block;
+        }
+      }
+
+      img {
+        width: 10px;
+        height: 5.62px;
+        margin: 14px;
+      }
+
+      p {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 35px;
+        letter-spacing: 0.015em;
+        color: #2C2C2C;
+
+        span {
+          margin-left: 10px;
+          color: #FE5F1E;
+          border-bottom: 1px dotted #FE5F1E;
+        }
+      }
+    }
+  }
+
+}

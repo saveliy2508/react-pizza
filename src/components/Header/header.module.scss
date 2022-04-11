@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 50px 15px 30px 15px;
+  border-bottom: 1px solid #F7F7F7;
+  .headerLeft{
+    width: 350px;
+    cursor: pointer;
+    .logo{
+      display: block;
+      float: left;
+      width: 38px;
+      height: 38px;
+      margin-right: 15px;
+    }
+    .title{
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: 0.01em;
+      color: #181818;
+    }
+    .slogan{
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 30px;
+      color: #7B7B7B;
+
+    }
+  }
+  .headerRight{
+    width: 150px;
+    height: 50px;
+    background: #FE5F1E;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    line-height: 25px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 700;
+    .leftPart{
+      padding-left: 23px;
+      margin: 12px 0;
+    }
+    .border{
+      border-right: 1px solid black;
+      margin: 12px 0;
+    }
+    .rightPart{
+      padding-right: 23px;
+      margin: 12px 0;
+      .cart {
+        margin: 3px 5px 0 0;
+        margin: 3px 5px 0 0;
+      }
+    }
+  }
+}
