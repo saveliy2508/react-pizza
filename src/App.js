@@ -11,7 +11,6 @@ function App(props) {
             <div className={s.wrapper}>
                 <Header/>
                 <Main />
-                лул
             </div>
         </div>
     );
