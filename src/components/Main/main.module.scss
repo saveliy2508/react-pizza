@@ -35,10 +35,12 @@
     }
 
     .sortingRight {
+      min-width: 265px;
       .menu {
         display: flex;
         cursor: pointer;
       }
+
       .subMenu {
         background-color: #ffffff;
         width: 132px;
@@ -53,12 +55,19 @@
           padding: 3px 15px;
           display: block;
           cursor: pointer;
+
           &:hover {
-          background-color: #FE5F1E;
-            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
           }
+
         }
       }
+
+      .activeSubItem {
+        background-color: #FE5F1E;
+        color: white;
+      }
+
 
       img {
         width: 10px;

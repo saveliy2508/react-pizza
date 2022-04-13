@@ -1,0 +1,42 @@
+.cartConteiner {
+  .emptyCart {
+    max-width: 547px;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center;
+
+    .title {
+      font-weight: 700;
+      font-size: 32px;
+      letter-spacing: 0.01em;
+      img{
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    .text {
+      margin: 10px 0 20px 0;
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+      color: #777777;
+    }
+    .cartImage{
+      width: 300px;
+      height: 255px;
+    }
+    .button{
+      color: #ffffff;
+      width: 210px;
+      height: 46px;
+      background: #282828;
+      border-radius: 30px;
+      margin: 35px auto 0 auto;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 43px;
+      letter-spacing: 0.015em;
+    }
+  }
+}

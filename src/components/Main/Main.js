@@ -16,7 +16,9 @@ function Main(props) {
         {parentId: 8, name: 'Сырный цыпленок', image: './img/8.jpg', price: 395},
     ]
 
-    let sortingButton = [{name: 'Все'}, {name: 'Мясные'}, {name: 'Вегетарианская'}, {name: 'Гриль'}, {name: 'Острые'}]
+    let sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
+
+    let subMenu = ['популярности', 'цене', 'алфавиту']
 
     const [isActiveSort, setIsActiveSort] = useState(0);
 
@@ -26,26 +28,53 @@ function Main(props) {
 
     const [isSubMenu, setIsSubMenu] = useState(false);
 
+    let toggleSubMenu = () => {
+        setIsSubMenu(!isSubMenu)
+    }
+
+    const [isActiveSubMenu, setIsActiveSubMenu] = useState(0);
+
+    let onActiveSubMenu = (index) => {
+        setIsActiveSubMenu(index)
+        setIsSubMenu(false)
+    }
+
+    const sortRef = React.useRef();
+
+    const handleOutsideClick = (e) => {
+        if (!e.path.includes(sortRef.current)) {
+            setIsSubMenu(false)
+        }
+    }
+
+    React.useEffect(() => {
+        return () => {
+            document.body.addEventListener('click', handleOutsideClick)
+        };
+    }, []);
+
+
     return (
         <div className={s.main}>
             <div className={s.sorting}>
                 <div className={s.sortingLeft}>
                     {sortingButton.map((item, index) => (
                         <div key={`Btn${index}`} className={isActiveSort === index ? s.active : null}
-                             onClick={() => onSortButton(index)}>{item.name}</div>
+                             onClick={() => onSortButton(index)}>{item}</div>
                     ))}
                 </div>
-                <div className={s.sortingRight}>
-                    <div className={s.menu} onClick={() => setIsSubMenu(!isSubMenu)}>
+                <div className={s.sortingRight} ref={sortRef}>
+                    <div className={s.menu} onClick={toggleSubMenu}>
                         <img src='./img/arrowTop.svg' alt="arrow"/>
                         <p>Сортировка по:</p>
-                        <p><span>популярности</span></p>
+                        <p><span>{subMenu[isActiveSubMenu]}</span></p>
                     </div>
                     {isSubMenu ? <div className={s.subMenu}>
                         <div className={s.features}>
-                            <p className={s.item}>популярности</p>
-                            <p className={s.item}>по цене</p>
-                            <p className={s.item}>по алфавиту</p>
+                            {subMenu.map((item, index) => (
+                                <p onClick={() => onActiveSubMenu(index)} key={'subMenuItem' + index}
+                                   className={isActiveSubMenu == index ? s.activeSubItem : null}>{item}</p>
+                            ))}
                         </div>
                     </div> : null}
                 </div>
