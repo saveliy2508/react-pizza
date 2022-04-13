@@ -3,23 +3,27 @@
   justify-content: space-between;
   padding: 50px 15px 30px 15px;
   border-bottom: 1px solid #F7F7F7;
-  .headerLeft{
+
+  .headerLeft {
     width: 350px;
     cursor: pointer;
-    .logo{
+
+    .logo {
       display: block;
       float: left;
       width: 38px;
       height: 38px;
       margin-right: 15px;
     }
-    .title{
+
+    .title {
       font-weight: 800;
       font-size: 24px;
       letter-spacing: 0.01em;
       color: #181818;
     }
-    .slogan{
+
+    .slogan {
       font-weight: 400;
       font-size: 16px;
       line-height: 30px;
@@ -27,7 +31,12 @@
 
     }
   }
-  .headerRight{
+
+  .headerRight {
+    &:active{
+      border: 1px solid rgba(#000, .05);
+      transition: all 250ms linear;
+    }
     width: 150px;
     height: 50px;
     background: #FE5F1E;
@@ -39,19 +48,26 @@
     cursor: pointer;
     color: #ffffff;
     font-weight: 700;
-    .leftPart{
+
+    &:hover {
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.36);
+    }
+
+    .leftPart {
       padding-left: 23px;
       margin: 12px 0;
     }
-    .border{
+
+    .border {
       border-right: 1px solid black;
       margin: 12px 0;
     }
-    .rightPart{
+
+    .rightPart {
       padding-right: 23px;
       margin: 12px 0;
+
       .cart {
-        margin: 3px 5px 0 0;
         margin: 3px 5px 0 0;
       }
     }

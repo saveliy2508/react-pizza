@@ -9,7 +9,11 @@
     .sortingLeft {
       display: flex;
 
-      .sortingButton {
+      :hover {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
+      }
+
+      div {
         cursor: pointer;
         font-weight: 700;
         background: #F9F9F9;
@@ -23,6 +27,11 @@
         margin-right: 8px;
         height: 46px;
       }
+
+      .active {
+        background-color: black;
+        color: white;
+      }
     }
 
     .sortingRight {
@@ -30,9 +39,8 @@
         display: flex;
         cursor: pointer;
       }
-
       .subMenu {
-        //display: none;
+        background-color: #ffffff;
         width: 132px;
         height: 150px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
@@ -44,6 +52,11 @@
         p {
           padding: 3px 15px;
           display: block;
+          cursor: pointer;
+          &:hover {
+          background-color: #FE5F1E;
+            color: white;
+          }
         }
       }
 
