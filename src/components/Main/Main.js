@@ -6,10 +6,10 @@ import s from './main.module.scss'
 import Pizza from "./Pizza/Pizza"
 
 function Main() {
-    const [pizzas, setPizzas] = React.useState([]);
-    React.useEffect(() => {
-        axios.get('http://localhost:3000/db.json').then((resp) => setPizzas(resp.data.pizzas))
-    }, []);
+    // const [pizzas, setPizzas] = React.useState([]);
+    // React.useEffect(() => {
+    //     axios.get('http://localhost:3000/db.json').then((resp) => setPizzas(resp.data.pizzas))
+    // }, []);
 
     let sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
 
@@ -76,17 +76,17 @@ function Main() {
             </div>
             <div className={s.pizzasTitle}>Все пиццы</div>
             <div className={s.pizzas}>
-                {pizzas.map((item, index) => (
-                    <Pizza
-                        key={`${item.name}${index}`}
-                        parentId={item.parentId}
-                        name={item.name}
-                        price={item.price}
-                        imageUrl={item.imageUrl}
-                        types={item.types}
-                        sizes={item.sizes}
-                    />
-                ))}
+                {/*{items.map((item, index) => (*/}
+                {/*    <Pizza*/}
+                {/*        key={`${item.name}${index}`}*/}
+                {/*        parentId={item.parentId}*/}
+                {/*        name={item.name}*/}
+                {/*        price={item.price}*/}
+                {/*        imageUrl={item.imageUrl}*/}
+                {/*        types={item.types}*/}
+                {/*        sizes={item.sizes}*/}
+                {/*    />*/}
+                {/*))}*/}
             </div>
         </div>
     )
