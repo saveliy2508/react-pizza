@@ -1,33 +1,33 @@
 import React, {useEffect} from "react";
-import Pizza from "./Pizza/Pizza"
 import axios from "axios";
 
 import s from './main.module.scss'
-import {useState} from "react";
 
-function Main(props) {
-    const [pizzas, setPizzas] = useState([]);
+import Pizza from "./Pizza/Pizza"
+
+function Main() {
+    const [pizzas, setPizzas] = React.useState([]);
     React.useEffect(() => {
         axios.get('http://localhost:3000/db.json').then((resp) => setPizzas(resp.data.pizzas))
     }, []);
 
     let sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
 
-    let subMenu = ['популярности', 'цене', 'алфавиту']
+    let subMenu = [{name: 'популярности', type: 'popular'}, {name: 'цена', type: 'price'}, {name: 'алфавиту', type: 'alphabet'}]
 
-    const [isActiveSort, setIsActiveSort] = useState(0);
+    const [isActiveSort, setIsActiveSort] = React.useState(0);
 
     let onSortButton = (index) => {
         setIsActiveSort(index)
     }
 
-    const [isSubMenu, setIsSubMenu] = useState(false);
+    const [isSubMenu, setIsSubMenu] = React.useState(false);
 
     let toggleSubMenu = () => {
         setIsSubMenu(!isSubMenu)
     }
 
-    const [isActiveSubMenu, setIsActiveSubMenu] = useState(0);
+    const [isActiveSubMenu, setIsActiveSubMenu] = React.useState(0);
 
     let onActiveSubMenu = (index) => {
         setIsActiveSubMenu(index)
@@ -62,13 +62,13 @@ function Main(props) {
                     <div className={s.menu} onClick={toggleSubMenu}>
                         <img src='./img/arrowTop.svg' alt="arrow"/>
                         <p>Сортировка по:</p>
-                        <p><span>{subMenu[isActiveSubMenu]}</span></p>
+                        <p><span>{subMenu[isActiveSubMenu].name}</span></p>
                     </div>
                     {isSubMenu ? <div className={s.subMenu}>
                         <div className={s.features}>
                             {subMenu.map((item, index) => (
                                 <p onClick={() => onActiveSubMenu(index)} key={'subMenuItem' + index}
-                                   className={isActiveSubMenu == index ? s.activeSubItem : null}>{item}</p>
+                                   className={isActiveSubMenu == index ? s.activeSubItem : null}>{item.name}</p>
                             ))}
                         </div>
                     </div> : null}

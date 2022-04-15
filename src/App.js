@@ -7,7 +7,7 @@ import Header from './components/Header/Header'
 import Main from "./components/Main/Main";
 import Cart from './components/Cart/Cart'
 
-function App(props) {
+function App() {
     return (
         <div className={s.App}>
             <div className={s.wrapper}>
