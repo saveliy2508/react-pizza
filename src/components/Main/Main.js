@@ -3,37 +3,41 @@ import React from "react";
 import s from './main.module.scss'
 
 import Pizza from "./Pizza/Pizza"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setCategory} from './../../redux/actions/filters'
 
 function Main(props) {
+    const dispatch = useDispatch();
     const {items} = useSelector(({pizza}) => {
         return {
             items: pizza.items,
         }
     });
 
-    let sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
+    const sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
 
-    let subMenu = [{name: 'популярности', type: 'popular'}, {name: 'цена', type: 'price'}, {
-        name: 'алфавиту',
-        type: 'alphabet'
-    }]
+    const subMenu = [
+        {name: 'популярности', type: 'popular'},
+        {name: 'цена', type: 'price'},
+        {name: 'алфавиту', type: 'alphabet'}
+    ]
 
     const [isActiveSort, setIsActiveSort] = React.useState(0);
 
-    let onSortButton = (index) => {
+    const onSortButton = (index) => {
         setIsActiveSort(index)
+        dispatch(setCategory(index))
     }
 
     const [isSubMenu, setIsSubMenu] = React.useState(false);
 
-    let toggleSubMenu = () => {
+    const toggleSubMenu = () => {
         setIsSubMenu(!isSubMenu)
     }
 
     const [isActiveSubMenu, setIsActiveSubMenu] = React.useState(0);
 
-    let onActiveSubMenu = (index) => {
+    const onActiveSubMenu = (index) => {
         setIsActiveSubMenu(index)
         setIsSubMenu(false)
     }

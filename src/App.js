@@ -17,7 +17,6 @@ function App() {
     React.useEffect(() => {
         axios.get('http://localhost:3000/db.json').then(({data}) => {
             dispatch(setPizzas(data.pizzas))
-            console.log(1)
         })
     }, [])
     return (
