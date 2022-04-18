@@ -5,7 +5,7 @@ import s from './main.module.scss'
 
 import Pizza from "./Pizza/Pizza"
 
-function Main() {
+function Main(props) {
     // const [pizzas, setPizzas] = React.useState([]);
     // React.useEffect(() => {
     //     axios.get('http://localhost:3000/db.json').then((resp) => setPizzas(resp.data.pizzas))
@@ -48,7 +48,7 @@ function Main() {
         };
     }, []);
 
-
+    console.log(props)
     return (
         <div className={s.main}>
             <div className={s.sorting}>
@@ -76,17 +76,17 @@ function Main() {
             </div>
             <div className={s.pizzasTitle}>Все пиццы</div>
             <div className={s.pizzas}>
-                {/*{items.map((item, index) => (*/}
-                {/*    <Pizza*/}
-                {/*        key={`${item.name}${index}`}*/}
-                {/*        parentId={item.parentId}*/}
-                {/*        name={item.name}*/}
-                {/*        price={item.price}*/}
-                {/*        imageUrl={item.imageUrl}*/}
-                {/*        types={item.types}*/}
-                {/*        sizes={item.sizes}*/}
-                {/*    />*/}
-                {/*))}*/}
+                {props.items.map((item, index) => (
+                    <Pizza
+                        key={`${item.name}${index}`}
+                        parentId={item.parentId}
+                        name={item.name}
+                        price={item.price}
+                        imageUrl={item.imageUrl}
+                        types={item.types}
+                        sizes={item.sizes}
+                    />
+                ))}
             </div>
         </div>
     )

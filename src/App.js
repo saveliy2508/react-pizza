@@ -3,13 +3,13 @@ import {Routes, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import store from './redux/store'
 import {setPizzas} from './redux/actions/pizzas'
+import axios from "axios";
 
 import s from './App.module.scss';
 
 import Header from './components/Header/Header'
 import Main from "./components/Main/Main";
 import Cart from './components/Cart/Cart'
-import axios from "axios";
 
 
 class App extends React.Component {
@@ -25,7 +25,7 @@ class App extends React.Component {
                 <div className={s.wrapper}>
                     <Header/>
                     <Routes>
-                        <Route path='/main' element={<Main/>}/>
+                        <Route path='/main' element={<Main items={this.props.items}/>}/>
                         <Route path='/cart' element={<Cart/>}/>
                     </Routes>
                 </div>
@@ -51,13 +51,13 @@ class App extends React.Component {
 
 let mapStateToProps = (state) => {
     return{
-        items: state.pizzas.items
+        items: state.pizza.items
     }
 
 }
 
-let mapDispatchToProps = () => {
+// let mapDispatchToProps = () => {
+//
+// }
 
-}
-
-export default App;
+export default connect(mapStateToProps)(App);
