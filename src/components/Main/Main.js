@@ -1,19 +1,23 @@
-import React, {useEffect} from "react";
-import axios from "axios";
+import React from "react";
 
 import s from './main.module.scss'
 
 import Pizza from "./Pizza/Pizza"
+import {useSelector} from "react-redux";
 
 function Main(props) {
-    // const [pizzas, setPizzas] = React.useState([]);
-    // React.useEffect(() => {
-    //     axios.get('http://localhost:3000/db.json').then((resp) => setPizzas(resp.data.pizzas))
-    // }, []);
+    const {items} = useSelector(({pizza}) => {
+        return {
+            items: pizza.items,
+        }
+    });
 
     let sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
 
-    let subMenu = [{name: 'популярности', type: 'popular'}, {name: 'цена', type: 'price'}, {name: 'алфавиту', type: 'alphabet'}]
+    let subMenu = [{name: 'популярности', type: 'popular'}, {name: 'цена', type: 'price'}, {
+        name: 'алфавиту',
+        type: 'alphabet'
+    }]
 
     const [isActiveSort, setIsActiveSort] = React.useState(0);
 
@@ -41,14 +45,6 @@ function Main(props) {
             setIsSubMenu(false)
         }
     }
-
-    React.useEffect(() => {
-        return () => {
-            document.body.addEventListener('click', handleOutsideClick)
-        };
-    }, []);
-
-    console.log(props)
     return (
         <div className={s.main}>
             <div className={s.sorting}>
@@ -76,7 +72,7 @@ function Main(props) {
             </div>
             <div className={s.pizzasTitle}>Все пиццы</div>
             <div className={s.pizzas}>
-                {props.items.map((item, index) => (
+                {items.map((item, index) => (
                     <Pizza
                         key={`${item.name}${index}`}
                         parentId={item.parentId}
