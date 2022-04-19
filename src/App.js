@@ -15,8 +15,8 @@ function App() {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        axios.get('http://localhost:3000/db.json').then(({data}) => {
-            dispatch(setPizzas(data.pizzas))
+        axios.get('https://6242deadd126926d0c58b871.mockapi.io/items').then(({data}) => {
+            dispatch(setPizzas(data))
         })
     }, [])
     return (
