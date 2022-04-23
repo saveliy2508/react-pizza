@@ -1,10 +1,12 @@
 import React from "react";
+import ContentLoader from "react-content-loader";
 
 import s from './main.module.scss'
 
 import Pizza from "./Pizza/Pizza"
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory} from './../../redux/actions/filters'
+import { fetchPizzas } from './../../redux/actions/pizzas';
 
 function Main(props) {
     const dispatch = useDispatch();
@@ -13,6 +15,18 @@ function Main(props) {
             items: pizza.items,
         }
     });
+    const { category, sortBy } = useSelector(({filter}) => filter);
+    React.useEffect(() => {
+        dispatch(fetchPizzas(sortBy, category));
+    }, [category, sortBy]);
+
+    // const onSelectCategory = React.useCallback((index) => {
+    //     dispatch(setCategory(index));
+    // }, []);
+
+    // const onSelectSortType = React.useCallback((type) => {
+    //     dispatch(setSortBy(type));
+    // }, []);
 
     const sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые']
 

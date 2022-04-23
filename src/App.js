@@ -1,7 +1,7 @@
 import React from "react";
 import {Routes, Route} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import {setPizzas} from './redux/actions/pizzas'
+import {fetchPizzas} from './redux/actions/pizzas'
 import axios from "axios";
 
 import s from './App.module.scss';
@@ -15,9 +15,7 @@ function App() {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        axios.get('https://6242deadd126926d0c58b871.mockapi.io/items').then(({data}) => {
-            dispatch(setPizzas(data))
-        })
+        dispatch(fetchPizzas())
     }, [])
     return (
         <div className={s.App}>
