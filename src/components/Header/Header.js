@@ -2,8 +2,13 @@ import React from "react";
 
 import s from './header.module.scss'
 import {NavLink} from 'react-router-dom'
+import {useSelector} from "react-redux";
 
 function Header(props) {
+    const {totalPrice, totalItems} = useSelector(({cart}) => ({
+        totalPrice: cart.totalPrice,
+        totalItems: cart.totalItems,
+    }))
     return (
         <header className={s.header}>
             <NavLink to='/main'>
@@ -15,9 +20,9 @@ function Header(props) {
             </NavLink>
             <NavLink to='/cart'>
                 <div className={s.headerRight}>
-                    <div className={s.leftPart}>520 ₽</div>
+                    <div className={s.leftPart}>{totalPrice} ₽</div>
                     <div className={s.border}></div>
-                    <div className={s.rightPart}><img className={s.cart} src="./img/cart.svg" alt="cart"/>3</div>
+                    <div className={s.rightPart}><img className={s.cart} src="./img/cart.svg" alt="cart"/>{totalItems}</div>
                 </div>
             </NavLink>
         </header>

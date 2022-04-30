@@ -11,10 +11,15 @@ function Pizza(props) {
     const onSelectType = (index) => {
         setActiveType(index)
     }
-    const [activeSize, setActiveSize] = React.useState(props.sizes[0]==26? 0: props.sizes[0]==30? 1: 2);
+    const [activeSize, setActiveSize] = React.useState(props.sizes[0] == 26 ? 0 : props.sizes[0] == 30 ? 1 : 2);
     const onSelectSize = (index) => {
         setActiveSize(index)
     }
+
+    const cartData = {
+        ...props, activeType: activeType, activeSize: activeSize
+    }
+
     return (
         <div className={s.pizza}>
             <img display='block' className={s.image} src={props.imageUrl}></img>
@@ -41,7 +46,9 @@ function Pizza(props) {
             </div>
             <div className={s.footer}>
                 <div className={s.price}>от {props.price} ₽</div>
-                <div className={classNames(s.addButton)}><img src="./img/plusOrange.svg" alt=""/>Добавить</div>
+                <div className={classNames(s.addButton)} onClick={() => props.onAddCartItem(cartData)}><img
+                    src="./img/plusOrange.svg" alt=""/>Добавить
+                </div>
             </div>
         </div>
     )
