@@ -27,30 +27,36 @@
 
   .footer {
     margin-top: 50px;
+
     .summ {
       display: flex;
       justify-content: space-between;
       letter-spacing: 0.01em;
       font-size: 22px;
+
       span {
         font-weight: 700;
       }
     }
+
     .buttons {
       display: flex;
       justify-content: space-between;
       margin-top: 30px;
+
       .back {
         color: #CACACA;
         font-size: 16px;
         border: 1px solid #D3D3D3;
         background: #FFFFFF;
       }
+
       .pay {
         background: #FE5F1E;
         color: white;
         font-size: 16px;
       }
+
       button {
         width: 211px;
         height: 55px;

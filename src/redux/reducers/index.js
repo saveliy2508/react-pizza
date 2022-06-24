@@ -4,9 +4,9 @@ import pizzaReducer from './pizzas'
 import cartReducer from "./cart";
 
 const rootReducer = combineReducers({
-    filter: filterReducer,
-    pizza: pizzaReducer,
-    cart: cartReducer,
+  filter: filterReducer,
+  pizza: pizzaReducer,
+  cart: cartReducer,
 })
 
 export default rootReducer;

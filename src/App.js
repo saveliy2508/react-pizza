@@ -11,23 +11,23 @@ import Cart from './components/Cart/Cart'
 
 
 function App() {
-    const dispatch = useDispatch();
-
-    React.useEffect(() => {
-        dispatch(fetchPizzas())
-    }, [])
-
-    return (
-        <div className={s.App}>
-            <div className={s.wrapper}>
-                <Header/>
-                <Routes>
-                    <Route path='/main' element={<Main/>}/>
-                    <Route path='/cart' element={<Cart/>}/>
-                </Routes>
-            </div>
-        </div>
-    );
+  const dispatch = useDispatch();
+  
+  React.useEffect(() => {
+    dispatch(fetchPizzas())
+  }, [])
+  
+  return (
+    <div className={s.App}>
+      <div className={s.wrapper}>
+        <Header/>
+        <Routes>
+          <Route path='/main' element={<Main/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+        </Routes>
+      </div>
+    </div>
+  );
 }
 
 export default (App);
