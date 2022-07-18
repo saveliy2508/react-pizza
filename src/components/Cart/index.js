@@ -1,15 +1,12 @@
 import React from 'react';
 import s from './cart.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import CartItem from "./CartItem/CartItem";
+import CartItem from "./CartItem";
 
 function Cart() {
-  const dispatcher = useDispatch()
-  
   const {items} = useSelector(({cart}) => {
     return {items: cart.items}
   })
-  console.log(items)
   return (<>
       {items.length !== 0 ?
         <div className={s.CartItems}>

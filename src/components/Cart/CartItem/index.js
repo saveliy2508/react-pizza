@@ -1,8 +1,7 @@
 import React from 'react';
 import s from './cartItem.module.scss'
 
-const CartItem = (props) => {
-    console.log(props)
+const Index = (props) => {
     return (
         <div className={s.cartItem}>
             <div className={s.cartItemLeft}>
@@ -27,4 +26,4 @@ const CartItem = (props) => {
     );
 };
 
-export default CartItem;
+export default Index;

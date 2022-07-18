@@ -5,9 +5,9 @@ import {fetchPizzas} from './redux/actions/pizzas'
 
 import s from './App.module.scss';
 
-import Header from './components/Header/Header'
-import Main from "./components/Main/Main";
-import Cart from './components/Cart/Cart'
+import Header from './components/Header'
+import Main from "./components/Main";
+import Cart from './components/Cart'
 
 
 function App() {

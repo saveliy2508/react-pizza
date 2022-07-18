@@ -4,7 +4,7 @@ import s from './header.module.scss'
 import {NavLink} from 'react-router-dom'
 import {useSelector} from "react-redux";
 
-function Header(props) {
+function Index(props) {
   const {totalPrice, totalItems} = useSelector(({cart}) => ({
     totalPrice: cart.totalPrice,
     totalItems: cart.totalItems,
@@ -29,4 +29,4 @@ function Header(props) {
   )
 }
 
-export default Header;
+export default Index;

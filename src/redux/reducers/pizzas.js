@@ -1,16 +1,20 @@
+export const SET_PIZZAS = 'SET_PIZZAS'
+export const SET_LOADED = 'SET_LOADED'
+
+
 const initialState = {
   items: [],
   isLoaded: false
 }
 
 const pizzas = (state = initialState, action) => {
-  if (action.type === 'SET_PIZZAS') {
+  if (action.type === SET_PIZZAS) {
     return {
       ...state,
       items: action.payload,
       isLoaded: true,
     };
-  } else if (action.type === 'SET_LOADED') {
+  } else if (action.type === SET_LOADED) {
     return {
       ...state,
       isLoaded: action.payload,

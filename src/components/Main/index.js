@@ -3,13 +3,13 @@ import ContentLoader from "react-content-loader";
 
 import s from './main.module.scss';
 
-import Pizza from "./Pizza/Pizza";
+import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategory, setSortBy} from './../../redux/actions/filters';
-import {fetchPizzas} from './../../redux/actions/pizzas';
+import {setCategory, setSortBy} from '../../redux/actions/filters';
+import {fetchPizzas} from '../../redux/actions/pizzas';
 import {setPizzaCart} from "../../redux/actions/cart";
 
-function Main(props) {
+function Index(props) {
   const dispatch = useDispatch();
   
   const {items} = useSelector(({pizza}) => {
@@ -130,4 +130,4 @@ function Main(props) {
 }
 
 
-export default Main;
+export default Index;

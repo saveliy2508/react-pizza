@@ -1,3 +1,5 @@
+export const ADD_PIZZA_CART = 'ADD_PIZZA_CART'
+
 const initialState = {
   items: [],
   totalItems: 0,
@@ -5,7 +7,7 @@ const initialState = {
 }
 
 const cart = (state = initialState, action) => {
-  if (action.type === 'ADD_PIZZA_CART') {
+  if (action.type === ADD_PIZZA_CART) {
     return {
       ...state,
       items: [...state.items, action.payload],

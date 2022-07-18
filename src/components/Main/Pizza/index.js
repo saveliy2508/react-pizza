@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import s from './pizza.module.scss'
 
-function Pizza(props) {
+function Index(props) {
     const typeNames = ['тонкое', 'традиционное'];
     const size = [26, 30, 40];
 
@@ -54,4 +54,4 @@ function Pizza(props) {
     )
 }
 
-export default Pizza;
+export default Index;
