@@ -1,12 +1,11 @@
 import React from 'react';
 import s from './cart.module.scss'
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import CartItem from "./CartItem";
 
 function Cart() {
-  const {items} = useSelector(({cart}) => {
-    return {items: cart.items}
-  })
+  const {items} = useSelector(({cartSlice}) => cartSlice)
+  
   return (<>
       {items.length !== 0 ?
         <div className={s.CartItems}>

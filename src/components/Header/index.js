@@ -5,10 +5,8 @@ import {NavLink} from 'react-router-dom'
 import {useSelector} from "react-redux";
 
 function Index(props) {
-  const {totalPrice, totalItems} = useSelector(({cart}) => ({
-    totalPrice: cart.totalPrice,
-    totalItems: cart.totalItems,
-  }))
+  const {totalItems, totalPrice} = useSelector(({cartSlice}) => cartSlice)
+
   return (
     <header className={s.header}>
       <NavLink to='/main'>

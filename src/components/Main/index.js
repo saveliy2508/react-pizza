@@ -5,33 +5,30 @@ import s from './main.module.scss';
 
 import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategory, setSortBy} from '../../redux/actions/filters';
-import {fetchPizzas} from '../../redux/actions/pizzas';
-import {setPizzaCart} from "../../redux/actions/cart";
+import {setCategory, setSortBy} from '../../redux/slices/filterSlice';
+import {setPizzas, setIsLoaded} from '../../redux/slices/pizzasSlice';
+import {addPizzaCart} from "../../redux/slices/cartSlice";
+import axios from "axios";
 
 function Index(props) {
   const dispatch = useDispatch();
   
-  const {items} = useSelector(({pizza}) => {
-    return {
-      items: pizza.items,
-    }
-  });
-  
-  const {isLoaded} = useSelector(({pizza}) => {
-    return {
-      isLoaded: pizza.isLoaded
-    }
-  });
-  const {category, sortBy} = useSelector(({filter}) => filter);
-  
+  const {items} = useSelector(({pizzasSlice}) => pizzasSlice);
+  const {isLoaded} = useSelector(({pizzasSlice}) => pizzasSlice);
+  const {category, sortBy} = useSelector(({filterSlice}) => filterSlice);
+  console.log(sortBy)
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick)
   }, []);
   
-  
   React.useEffect(() => {
-    dispatch(fetchPizzas(sortBy, category));
+    dispatch(setIsLoaded(false))
+    axios.get(`https://6242deadd126926d0c58b871.mockapi.io/items?sortBy=
+  ${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}
+  ${category ? `&category=${category - 1}` : ''}`
+    ).then(({data}) => {
+      dispatch(setPizzas(data))
+    })
   }, [category, sortBy]);
   
   const sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
@@ -66,7 +63,14 @@ function Index(props) {
   }
   
   const onAddCartItem = (newItem) => {
-    dispatch(setPizzaCart(newItem))
+    dispatch(addPizzaCart({
+      parentId: newItem.parentId,
+      name: newItem.name,
+      price: newItem.price,
+      imageUrl: newItem.imageUrl,
+      activeType: newItem.activeType,
+      activeSize: newItem.activeSize
+    }))
   }
   
   return (
@@ -84,14 +88,14 @@ function Index(props) {
             <p>Сортировка по:</p>
             <p><span>{sortBy}</span></p>
           </div>
-          {isSubMenu ? <div className={s.subMenu}>
+          {isSubMenu && <div className={s.subMenu}>
             <div className={s.features}>
               {subMenu.map((item, index) => (
                 <p onClick={() => onActiveSubMenu(index)} key={'subMenuItem' + index}
                    className={subMenu.findIndex(item => item.name == sortBy) == index ? s.activeSubItem : null}>{item.name}</p>
               ))}
             </div>
-          </div> : null}
+          </div>}
         </div>
       </div>
       <div className={s.pizzasTitle}>Все пиццы</div>
