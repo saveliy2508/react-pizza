@@ -1,34 +1,35 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
+import debounce from 'lodash.debounce'
 
 import s from './main.module.scss';
 
 import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory, setSortBy} from '../../redux/slices/filterSlice';
-import {setPizzas, setIsLoaded} from '../../redux/slices/pizzasSlice';
+import {setIsLoaded} from '../../redux/slices/pizzasSlice';
 import {addPizzaCart} from "../../redux/slices/cartSlice";
-import axios from "axios";
+import {Context} from "../../context";
+import Pagination from "./Pagination";
 
 function Index(props) {
+  const [filterInput, setFilterInput] = React.useState('');
+  
+  const {fetch} = React.useContext(Context);
+  
   const dispatch = useDispatch();
   
   const {items} = useSelector(({pizzasSlice}) => pizzasSlice);
   const {isLoaded} = useSelector(({pizzasSlice}) => pizzasSlice);
   const {category, sortBy} = useSelector(({filterSlice}) => filterSlice);
-  console.log(sortBy)
+  
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick)
   }, []);
   
   React.useEffect(() => {
     dispatch(setIsLoaded(false))
-    axios.get(`https://6242deadd126926d0c58b871.mockapi.io/items?sortBy=
-  ${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}
-  ${category ? `&category=${category - 1}` : ''}`
-    ).then(({data}) => {
-      dispatch(setPizzas(data))
-    })
+    fetch(sortBy, category, dispatch)
   }, [category, sortBy]);
   
   const sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
@@ -73,6 +74,10 @@ function Index(props) {
     }))
   }
   
+  const debounceFilterInput = debounce(
+    (e) => setFilterInput(e.target.value), 400
+  )
+  
   return (
     <div className={s.main}>
       <div className={s.sorting}>
@@ -98,10 +103,16 @@ function Index(props) {
           </div>}
         </div>
       </div>
-      <div className={s.pizzasTitle}>Все пиццы</div>
+      <div className={s.titleConteiner}>
+        <div className={s.pizzasTitle}>Все пиццы</div>
+        <div className={s.filterInput}>
+          <input type="text" onChange={debounceFilterInput}/>
+          <div onClick={() => setFilterInput('')}>+</div>
+        </div>
+      </div>
       <div className={s.pizzas}>
         {isLoaded ?
-          items.map((item, index) => (
+          items.filter(item => item.name.toLowerCase().includes(filterInput.toLowerCase())).map((item, index) => (
             <Pizza
               key={`${item.name}${index}`}
               parentId={item.parentId}
@@ -129,6 +140,7 @@ function Index(props) {
               <rect x="137" y="408" rx="25" ry="25" width="140" height="46"/>
             </ContentLoader>)}
       </div>
+      <Pagination />
     </div>
   )
 }

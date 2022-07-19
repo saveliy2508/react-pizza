@@ -1,0 +1,27 @@
+.pagination {
+  display: flex;
+  li{
+    border: 2px solid darkorange;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding-top: 6px;
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 24px;
+    cursor: pointer;
+    color: darkorange;
+
+    &:hover{
+      background-color: darkorange;
+      color: #FFFFFF;
+    }
+  }
+  :global{
+    .selected {
+      background-color: darkorange;
+      color: #FFFFFF;
+    }
+  }
+}
