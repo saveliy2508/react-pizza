@@ -1,18 +1,22 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 import debounce from 'lodash.debounce'
+import qs from 'qs'
+import {useNavigate} from 'react-router-dom'
 
 import s from './main.module.scss';
 
 import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategory, setSortBy} from '../../redux/slices/filterSlice';
+import {setCategory, setFilters, setPage, setSortBy} from '../../redux/slices/filterSlice';
 import {setIsLoaded} from '../../redux/slices/pizzasSlice';
 import {addPizzaCart} from "../../redux/slices/cartSlice";
 import {Context} from "../../context";
 import Pagination from "./Pagination";
 
 function Index() {
+  const navigate = useNavigate()
+  
   const [filterInput, setFilterInput] = React.useState('');
   
   const {fetch} = React.useContext(Context);
@@ -28,9 +32,27 @@ function Index() {
   }, []);
   
   React.useEffect(() => {
+    if(window.location.search){
+      const params = qs.parse(window.location.search.substring(1))
+      dispatch(setFilters(params))
+    }
+  }, []);
+  
+  React.useEffect(() => {
     dispatch(setIsLoaded(false))
     fetch(sortBy, category, page, dispatch)
   }, [category, sortBy, page]);
+  
+  React.useEffect(() => {
+    const queryString = qs.stringify({
+      sortBy: sortBy,
+      category: category,
+      page: page
+    })
+  
+    navigate(`?${queryString}`)
+  }, [category, sortBy, page])
+  
   
   const sortingButton = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']
   
@@ -42,6 +64,7 @@ function Index() {
   
   const onSortButton = (index) => {
     dispatch(setCategory(index))
+    dispatch(setPage(1))
   }
   
   const [isSubMenu, setIsSubMenu] = React.useState(false);
