@@ -32,7 +32,7 @@ function Index() {
   }, []);
   
   React.useEffect(() => {
-    if(window.location.search){
+    if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1))
       dispatch(setFilters(params))
     }
@@ -49,7 +49,7 @@ function Index() {
       category: category,
       page: page
     })
-  
+    
     navigate(`?${queryString}`)
   }, [category, sortBy, page])
   
@@ -93,7 +93,8 @@ function Index() {
       price: newItem.price,
       imageUrl: newItem.imageUrl,
       activeType: newItem.activeType,
-      activeSize: newItem.activeSize
+      activeSize: newItem.activeSize,
+      count: 1,
     }))
   }
   
