@@ -10,12 +10,12 @@ import axios from "axios";
 import {setPizzas} from "./redux/slices/pizzasSlice";
 import {Context} from "./context";
 
-const fetch = (sortBy, category, page, dispatch) => {
+const fetch = (sortBy, category, page, searchFilter, dispatch) => {
   axios.get(
-    `https://6242deadd126926d0c58b871.mockapi.io/items?page=${page}&limit=4&sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category ? `&category=${category - 1}` : ''}`
+    `https://6242deadd126926d0c58b871.mockapi.io/items?search=${searchFilter}&page=${page}&limit=4&sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category ? `&category=${category - 1}` : ''}`
   ).then(({data}) => {
     dispatch(setPizzas(data))
-  })
+  }).catch(()=> alert('Ошибка при загрузке пицц'))
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

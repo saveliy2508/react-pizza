@@ -6,35 +6,36 @@ import {useDispatch, useSelector} from "react-redux";
 import {setPage} from "../../../redux/slices/filterSlice";
 import axios from "axios";
 
-const Index = ({filterInput}) => {
+const Index = () => {
   
-  const {sortBy, category} = useSelector(({filterSlice}) => filterSlice)
+  const {sortBy, category, searchFilter} = useSelector(({filterSlice}) => filterSlice)
   
   const dispatch = useDispatch()
   
   const handlePageClick = (pageNumber) => {
-    dispatch(setPage(pageNumber.selected+1))
-    window.scrollTo(0,0)
+    dispatch(setPage(pageNumber.selected + 1))
+    window.scrollTo(0, 0)
   }
   
-  const [itemsWithoutPage, setItemsWithoutPage] = React.useState([]);;
+  const [itemsWithoutPage, setItemsWithoutPage] = React.useState([]);
   React.useEffect(() => {
-      axios.get(`https://6242deadd126926d0c58b871.mockapi.io/items?sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category ? `&category=${category - 1}` : ''}`).then(({data}) => setItemsWithoutPage(data))
-  }, [sortBy, category]);
-  
-  let pageCount = itemsWithoutPage.filter(item => item.name.toLowerCase().includes(filterInput.toLowerCase())) ? Math.ceil(itemsWithoutPage.filter(item => item.name.toLowerCase().includes(filterInput.toLowerCase())).length/4) : 1;
+    axios.get(`https://6242deadd126926d0c58b871.mockapi.io/items?search=${searchFilter}&sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category ? `&category=${category - 1}` : ''}`).then(({data}) => setItemsWithoutPage(data))
+  }, [sortBy, category, searchFilter]);
   
   return (
-    <ReactPaginate
-      className={s.pagination}
-      breakLabel="..."
-      nextLabel=">"
-      previousLabel="<"
-      onPageChange={handlePageClick}
-      pageRangeDisplayed={8}
-      pageCount={pageCount}
-      renderOnZeroPageCount={null}/>
-  );
+    <>
+      {Math.ceil(itemsWithoutPage.length / 4) > 1 &&
+        <ReactPaginate
+          className={s.pagination}
+          breakLabel="..."
+          nextLabel=">"
+          previousLabel="<"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={8}
+          pageCount={Math.ceil(itemsWithoutPage.length / 4)}
+          renderOnZeroPageCount={null}/>}
+    </>
+  )
 };
 
 export default Index;

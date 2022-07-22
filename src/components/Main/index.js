@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import ContentLoader from "react-content-loader";
 import debounce from 'lodash.debounce'
 import qs from 'qs'
@@ -8,7 +8,7 @@ import s from './main.module.scss';
 
 import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
-import {setCategory, setFilters, setPage, setSortBy} from '../../redux/slices/filterSlice';
+import {setCategory, setFilters, setPage, setSearchFilter, setSortBy} from '../../redux/slices/filterSlice';
 import {setIsLoaded} from '../../redux/slices/pizzasSlice';
 import {addPizzaCart} from "../../redux/slices/cartSlice";
 import {Context} from "../../context";
@@ -17,15 +17,13 @@ import Pagination from "./Pagination";
 function Index() {
   const navigate = useNavigate()
   
-  const [filterInput, setFilterInput] = React.useState('');
-  
   const {fetch} = React.useContext(Context);
   
   const dispatch = useDispatch();
   
   const {items} = useSelector(({pizzasSlice}) => pizzasSlice);
   const {isLoaded} = useSelector(({pizzasSlice}) => pizzasSlice);
-  const {category, sortBy, page} = useSelector(({filterSlice}) => filterSlice);
+  const {category, sortBy, page, searchFilter} = useSelector(({filterSlice}) => filterSlice);
   
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick)
@@ -40,8 +38,8 @@ function Index() {
   
   React.useEffect(() => {
     dispatch(setIsLoaded(false))
-    fetch(sortBy, category, page, dispatch)
-  }, [category, sortBy, page]);
+    fetch(sortBy, category, page, searchFilter, dispatch)
+  }, [category, sortBy, page, searchFilter]);
   
   React.useEffect(() => {
     const queryString = qs.stringify({
@@ -99,8 +97,13 @@ function Index() {
   }
   
   const debounceFilterInput = debounce(
-    (e) => setFilterInput(e.target.value), 400
+    (e) => dispatch(setSearchFilter(e.target.value)), 400
   )
+  
+  const handleClearSearchInput = (e) => {
+    e.target.previousSibling.value = '';
+    dispatch(setSearchFilter(''));
+  }
   
   return (
     <div className={s.main}>
@@ -131,12 +134,12 @@ function Index() {
         <div className={s.pizzasTitle}>Все пиццы</div>
         <div className={s.filterInput}>
           <input type="text" onChange={debounceFilterInput} placeholder='Поиск по названию'/>
-          <div onClick={() => setFilterInput('')}>+</div>
+          <div onClick={(e) => handleClearSearchInput(e)}>+</div>
         </div>
       </div>
       <div className={s.pizzas}>
         {isLoaded ?
-          items.filter(item => item.name.toLowerCase().includes(filterInput.toLowerCase())).map((item, index) => (
+          items.map((item, index) => (
             <Pizza
               key={`${item.name}${index}`}
               parentId={item.parentId}
@@ -164,7 +167,7 @@ function Index() {
               <rect x="137" y="408" rx="25" ry="25" width="140" height="46"/>
             </ContentLoader>)}
       </div>
-      <Pagination filterInput={filterInput}/>
+      <Pagination/>
     </div>
   )
 }
