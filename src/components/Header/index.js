@@ -1,11 +1,12 @@
 import React from "react";
 
 import s from './header.module.scss'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useLocation} from 'react-router-dom'
 import {useSelector} from "react-redux";
 
 function Index(props) {
   const {totalItems, totalPrice} = useSelector(({cartSlice}) => cartSlice)
+  const location = useLocation()
 
   return (
     <header className={s.header}>
@@ -16,13 +17,14 @@ function Index(props) {
           <div className={s.slogan}>самая вкусная пицца во вселенной</div>
         </div>
       </NavLink>
-      <NavLink to='/cart'>
+      
+      {location.pathname !== '/cart' && <NavLink to='/cart'>
         <div className={s.headerRight}>
           <div className={s.leftPart}>{totalPrice} ₽</div>
           <div className={s.border}></div>
           <div className={s.rightPart}><img className={s.cart} src="./img/cart.svg" alt="cart"/>{totalItems}</div>
         </div>
-      </NavLink>
+      </NavLink>}
     </header>
   )
 }

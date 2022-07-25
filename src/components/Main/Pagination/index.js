@@ -5,7 +5,6 @@ import s from './pagination.module.scss'
 
 import {useDispatch, useSelector} from "react-redux";
 import {setPage} from "../../../redux/slices/filterSlice";
-import axios from "axios";
 import {fetchPizzasWithoutPages} from "../../../redux/slices/pizzasSlice";
 
 const Index = () => {

@@ -9,7 +9,7 @@ import s from './main.module.scss';
 import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory, setFilters, setPage, setSearchFilter, setSortBy} from '../../redux/slices/filterSlice';
-import {fetchPizzas, fetchPizzasWithoutPages, setIsLoaded} from '../../redux/slices/pizzasSlice';
+import {fetchPizzas, fetchPizzasWithoutPages} from '../../redux/slices/pizzasSlice';
 import {addPizzaCart} from "../../redux/slices/cartSlice";
 import Pagination from "./Pagination";
 
