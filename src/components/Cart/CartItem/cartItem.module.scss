@@ -40,25 +40,29 @@
       border-radius: 50%;
       background: #FFFFFF;
     }
+
     .count {
-      button{
+      button {
         border: 2px solid #FE5F1E;
         box-sizing: border-box;
         color: #FE5F1E;
         font-size: 22px;
       }
     }
-      p {
-        padding: 8px 15px 0 15px;
-        font-weight: 700;
-        font-size: 22px;
-        letter-spacing: 0.01em;
-        width: 55px;
-        text-align: center;
-      }
+
+    p {
+      padding: 8px 15px 0 15px;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.01em;
+      width: 55px;
+      text-align: center;
+    }
+
     span {
       padding-left: 5px;
     }
+
     .delete {
       border: 2px solid #D7D7D7;
       box-sizing: border-box;
