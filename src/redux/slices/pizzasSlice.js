@@ -4,20 +4,9 @@ import axios from "axios";
 export const fetchPizzas = createAsyncThunk(
   'pizzas/fetchPizzas',
   async (params) => {
-    const {category, page, sortBy} = params;
-    const {data} = await axios.get(
-      `https://6242deadd126926d0c58b871.mockapi.io/items?page=${page}&limit=4&sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category && `&category=${category}`}`
-    );
-    return data;
-  }
-)
-
-export const fetchPizzasWithoutPages = createAsyncThunk(
-  'pizzas/fetchPizzasWithoutPages',
-  async (params) => {
     const {category, sortBy} = params;
     const {data} = await axios.get(
-      `https://6242deadd126926d0c58b871.mockapi.io/items?sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category && `&category=${category}`}`
+      `https://6242deadd126926d0c58b871.mockapi.io/items?sortBy=${sortBy == 'алфавиту' ? 'name' : sortBy == 'популярности' ? 'rating' : 'price'}${category > 0 ? `&category=${category}` : ''}`
     );
     return data;
   }
@@ -25,7 +14,7 @@ export const fetchPizzasWithoutPages = createAsyncThunk(
 
 const initialState = {
   items: [],
-  itemsWithoutPage: [],
+  renderItem: [],
   isLoaded: false
 }
 
@@ -40,6 +29,9 @@ export const pizzasSlice = createSlice({
       state.items = action.payload;
       state.isLoaded = true
     },
+    setRenderItem(state, action) {
+      state.renderItem = state.items.filter((item) => item.name.toLowerCase().includes(action.payload.searchFilter.toLowerCase())).slice(action.payload.page * 4, action.payload.page * 4 + 4)
+    }
   },
   extraReducers: {
     [fetchPizzas.pending]: (state) => {
@@ -54,21 +46,9 @@ export const pizzasSlice = createSlice({
       state.items = []
       state.isLoaded = false
     },
-    [fetchPizzasWithoutPages.pending]: (state) => {
-      state.itemsWithoutPage = []
-      state.isLoaded = false
-    },
-    [fetchPizzasWithoutPages.fulfilled]: (state, action) => {
-      state.itemsWithoutPage = action.payload
-      state.isLoaded = true
-    },
-    [fetchPizzasWithoutPages.rejected]: (state) => {
-      state.itemsWithoutPage = []
-      state.isLoaded = false
-    },
   }
 })
 
-export const {setPizzas, setIsLoaded} = pizzasSlice.actions;
+export const {setPizzas, setRenderItem, setIsLoaded} = pizzasSlice.actions;
 
 export default pizzasSlice.reducer;

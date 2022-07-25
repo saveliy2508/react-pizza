@@ -58,7 +58,7 @@ function Index(props) {
       <div className={s.footer}>
         <div className={s.price}>от {props.price} ₽</div>
         <div className={classNames(s.addButton)} onClick={() => props.onAddCartItem(cartData)}><img
-          src="./img/plusOrange.svg" alt=""/>Добавить {counter && <span>{counter}</span>}
+          src="./img/plusOrange.svg" alt=""/>Добавить {counter !== 0 && <span>{counter}</span>}
         </div>
       </div>
     </div>

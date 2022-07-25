@@ -40,6 +40,9 @@
 
     .sortingRight {
       min-width: 265px;
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
 
       .menu {
         display: flex;
@@ -53,8 +56,9 @@
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.09);
         border-radius: 10px;
         position: absolute;
-        right: 20px;
         padding: 13px 0;
+        top: 46px;
+        z-index: 1;
 
         p {
           padding: 3px 15px;

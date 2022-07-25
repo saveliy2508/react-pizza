@@ -9,7 +9,7 @@ import s from './main.module.scss';
 import Pizza from "./Pizza";
 import {useDispatch, useSelector} from "react-redux";
 import {setCategory, setFilters, setPage, setSearchFilter, setSortBy} from '../../redux/slices/filterSlice';
-import {fetchPizzas, fetchPizzasWithoutPages} from '../../redux/slices/pizzasSlice';
+import {fetchPizzas, setRenderItem} from '../../redux/slices/pizzasSlice';
 import {addPizzaCart} from "../../redux/slices/cartSlice";
 import Pagination from "./Pagination";
 
@@ -18,9 +18,10 @@ function Index() {
   
   const dispatch = useDispatch();
   
-  const {items, itemsWithoutPage} = useSelector(({pizzasSlice}) => pizzasSlice);
+  const {items, renderItem} = useSelector(({pizzasSlice}) => pizzasSlice);
   const {isLoaded} = useSelector(({pizzasSlice}) => pizzasSlice);
   const {category, sortBy, page, searchFilter} = useSelector(({filterSlice}) => filterSlice);
+  
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick)
   }, []);
@@ -33,12 +34,12 @@ function Index() {
   }, []);
   
   React.useEffect(() => {
-    dispatch(fetchPizzas({category, page, sortBy}))
-  }, [category, page, sortBy]);
+    dispatch(fetchPizzas({category, sortBy}))
+  }, [category, sortBy]);
   
   React.useEffect(() => {
-    dispatch(fetchPizzasWithoutPages({category, sortBy}))
-  }, [category, page, sortBy, searchFilter]);
+    dispatch(setRenderItem({page, searchFilter}))
+  }, [category, sortBy, page, searchFilter, items]);
   
   React.useEffect(() => {
     const queryString = qs.stringify({
@@ -61,7 +62,7 @@ function Index() {
   
   const onSortButton = (index) => {
     dispatch(setCategory(index))
-    dispatch(setPage(1))
+    dispatch(setPage(0))
   }
   
   const [isSubMenu, setIsSubMenu] = React.useState(false);
@@ -138,32 +139,19 @@ function Index() {
       </div>
       <div className={s.pizzas}>
         {isLoaded ?
-          searchFilter ?
-            itemsWithoutPage.filter((item) => item.name.toLowerCase().includes(searchFilter.toLowerCase())).map((item, index) => (
-              <Pizza
-                key={`${item.name}${index}`}
-                parentId={item.parentId}
-                name={item.name}
-                price={item.price}
-                imageUrl={item.imageUrl}
-                types={item.types}
-                sizes={item.sizes}
-                onAddCartItem={onAddCartItem}
-              />
-            ))
-            :
-            items.map((item, index) => (
-              <Pizza
-                key={`${item.name}${index}`}
-                parentId={item.parentId}
-                name={item.name}
-                price={item.price}
-                imageUrl={item.imageUrl}
-                types={item.types}
-                sizes={item.sizes}
-                onAddCartItem={onAddCartItem}
-              />
-            )) :
+          renderItem.map((item, index) => (
+            <Pizza
+              key={`${item.name}${index}`}
+              parentId={item.parentId}
+              name={item.name}
+              price={item.price}
+              imageUrl={item.imageUrl}
+              types={item.types}
+              sizes={item.sizes}
+              onAddCartItem={onAddCartItem}
+            />
+          ))
+          :
           Array(4).fill(
             <ContentLoader
               className={s.fakePizzaBlock}
