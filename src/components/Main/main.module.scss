@@ -98,18 +98,20 @@
       }
     }
   }
+
   @media (max-width: 1024px) {
     .sorting {
       display: flex;
       flex-direction: column;
-      .sortingRight{
+
+      .sortingRight {
         margin-top: 20px;
         justify-content: flex-start;
       }
     }
   }
 
-  .titleConteiner {
+  .titleContainer {
     display: flex;
     justify-content: space-between;
 

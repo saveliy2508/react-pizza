@@ -1,20 +1,23 @@
-.pizza{
+.pizza {
   text-align: center;
   width: 270px;
   padding-bottom: 65px;
   margin-right: 30px;
-  .image{
+
+  .image {
     width: 259.12px;
     height: 260px;
   }
-  .title{
+
+  .title {
     font-weight: 800;
     font-size: 20px;
     letter-spacing: 0.01em;
     margin: 11px 0 15px 0;
     min-height: 40px;
   }
-  .settings{
+
+  .settings {
     background: #F3F3F3;
     border-radius: 10px;
     width: 280px;
@@ -23,19 +26,23 @@
     font-weight: 700;
     font-size: 14px;
     letter-spacing: 0.015em;
+
     .disabled {
       pointer-events: none;
       opacity: 0.4;
     }
-    .active{
+
+    .active {
       background: #FFFFFF;
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
     }
-    .dough{
+
+    .dough {
       display: flex;
       padding-top: 6px;
       margin-bottom: 5px;
-      div{
+
+      div {
         cursor: pointer;
         flex: 0 0 50%;
         width: 131.88px;
@@ -44,10 +51,12 @@
         line-height: 32px;
       }
     }
+
     .size {
       display: flex;
-      margin-top:5px;
-      div{
+      margin-top: 5px;
+
+      div {
         cursor: pointer;
         height: 32px;
         flex: 0 0 33%;
@@ -56,17 +65,21 @@
       }
     }
   }
+
   .footer {
     display: flex;
     margin-top: 15px;
-    div{
+
+    div {
       flex: 0 0 50%;
       cursor: pointer;
     }
+
     .price {
       font-size: 22px;
       font-weight: 700;
     }
+
     .addButton {
       color: #EB5A1E;
       font-size: 16px;
@@ -76,9 +89,11 @@
       border-radius: 5px;
       text-align: left;
       padding: 5px;
-      img{
+
+      img {
         padding: 2px 10px 0 0;
       }
+
       span {
         display: inline-block;
         width: 20px;
@@ -93,6 +108,7 @@
         text-align: center;
       }
     }
+
     .test {
       background-color: black;
     }

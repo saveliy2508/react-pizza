@@ -1,6 +1,7 @@
 .pagination {
   display: flex;
-  li{
+
+  li {
     border: 2px solid darkorange;
     border-radius: 50%;
     width: 40px;
@@ -11,6 +12,7 @@
     font-size: 24px;
     cursor: pointer;
     color: darkorange;
+
     a {
       display: block;
       padding-top: 6px;
@@ -18,12 +20,13 @@
       width: 100%;
     }
 
-    &:hover{
+    &:hover {
       background-color: darkorange;
       color: #FFFFFF;
     }
   }
-  :global{
+
+  :global {
     .selected {
       background-color: darkorange;
       color: #FFFFFF;

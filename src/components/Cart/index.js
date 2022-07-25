@@ -1,24 +1,31 @@
 import React from 'react';
-import s from './cart.module.scss'
 import {useDispatch, useSelector} from "react-redux";
-import CartItem from "./CartItem";
-import {clearAllPizzas} from "../../redux/slices/cartSlice";
 import {useNavigate} from "react-router-dom";
+
+import s from './cart.module.scss'
+
+import CartItem from "./CartItem";
+
+import {clearAllPizzas} from "../../redux/slices/cartSlice";
 
 function Cart() {
   const {items, totalItems, totalPrice} = useSelector(({cartSlice}) => cartSlice)
+  
   const navigate = useNavigate()
+  
   const dispatch = useDispatch()
-  const handleConfirmOrder = ()=> {
+  
+  const handleConfirmOrder = () => {
     alert(`Спасибо за заказ!`)
     navigate(-1)
     dispatch(clearAllPizzas())
   }
+  
   return (<>
     {items.length !== 0 ? <div className={s.CartItems}>
       <div className={s.header}>
         <div className={s.headerLeft}><img src="./img/blackCart.png" alt="корзина"/> Корзина</div>
-        <div className={s.headerRigth}><span onClick={() => dispatch(clearAllPizzas())}><img
+        <div className={s.headerRight}><span onClick={() => dispatch(clearAllPizzas())}><img
           src="./img/trashCart.svg" alt="очистка"/><span className={s.text}>Очистить корзину</span></span>
         </div>
       </div>
@@ -35,7 +42,7 @@ function Cart() {
         />))}
       </div>
       <div className={s.footer}>
-        <div className={s.summ}>
+        <div className={s.sum}>
           <div>Всего пицц: <span>{totalItems} шт.</span></div>
           <div>Сумма заказа: <span>{totalPrice} ₽</span></div>
         </div>
@@ -44,10 +51,10 @@ function Cart() {
                                                                        src="./img/arrowBack.svg"
                                                                        alt="arrowBack"/> Вернуться назад
           </button>
-          <button className={s.pay} onClick={()=> handleConfirmOrder()}>Оплатить сейчас</button>
+          <button className={s.pay} onClick={() => handleConfirmOrder()}>Оплатить сейчас</button>
         </div>
       </div>
-    </div> : <div className={s.cartConteiner}>
+    </div> : <div className={s.cartContainer}>
       <div className={s.emptyCart}>
         <div className={s.title}>Корзина пустая <img src="./img/smile.svg" alt="smile"
                                                      className={s.smile}/>
@@ -55,11 +62,11 @@ function Cart() {
         <div className={s.text}>Вероятней всего, вы не заказывали ещё пиццу.
           Для того, чтобы заказать пиццу, перейди на главную страницу.
         </div>
-        <img className={s.cartImage} display='block' src='./img/emptyCart.jpg'/>
+        <img className={s.cartImage} src='./img/emptyCart.jpg' alt='emptyCart'/>
         <div className={s.button} onClick={() => navigate(-1)}>Вернуться назад</div>
       </div>
     </div>}
   </>)
-};
+}
 
 export default Cart;
