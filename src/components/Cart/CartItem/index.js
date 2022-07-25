@@ -6,9 +6,11 @@ import {clearPizzas, decrementPizza, incrementPizza} from "../../../redux/slices
 const Index = ({parentId, imageUrl, price, name, activeType, activeSize, count}) => {
   const {items} = useSelector(({cartSlice}) => cartSlice)
   const dispatch = useDispatch()
+  
   const handleClearPizzas = () => {
     dispatch(clearPizzas(items.indexOf(items.find(item => item.parentId == parentId && item.activeType == activeType && item.activeSize == activeSize))))
   }
+  
   const handleIncrementPizza = () => {
     dispatch(incrementPizza(items.indexOf(items.find(item => item.parentId == parentId && item.activeType == activeType && item.activeSize == activeSize))))
   }
