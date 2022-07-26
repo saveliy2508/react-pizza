@@ -99,7 +99,7 @@
     }
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1062px) {
     .sorting {
       display: flex;
       flex-direction: column;
@@ -151,8 +151,15 @@
 
   .pizzas {
     display: flex;
-    justify-content: start;
+    justify-content: center;
     flex-wrap: wrap;
     margin-top: 5px;
+  }
+}
+
+@media (max-width: 790px) {
+  .sortingLeft {
+    overflow-x: auto;
+    padding-bottom: 20px;
   }
 }
