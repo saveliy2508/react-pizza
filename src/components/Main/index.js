@@ -5,7 +5,6 @@ import qs from 'qs'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Pagination from './Pagination'
-
 import s from './main.module.scss'
 
 import Pizza from './Pizza'
