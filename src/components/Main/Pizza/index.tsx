@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { useSelector } from 'react-redux'
 
 import s from './pizza.module.scss'
+import { RootState } from '../../../redux/store'
 
 type MainPageProps = {
 	types: [number]
@@ -26,9 +27,7 @@ const Index: React.FC<MainPageProps> = ({
 	const typeNames = ['тонкое', 'традиционное']
 	const size = [26, 30, 40]
 
-	const { items }: any = useSelector<{
-		cartSlice: {}
-	}>(({ cartSlice }) => cartSlice)
+	const { cartItems } = useSelector(({ cartSlice }: RootState) => cartSlice)
 
 	const [activeType, setActiveType] = React.useState<number>(types[0])
 	const [counter, setCounter] = React.useState<number>(0)
@@ -59,11 +58,13 @@ const Index: React.FC<MainPageProps> = ({
 
 	React.useEffect(() => {
 		setCounter(
-			items
-				.filter((item: { parentId: number }) => parentId === item.parentId)
+			cartItems
+				.filter((item) => parentId === item.parentId)
 				?.reduce((sum: number, item: { count: number }) => item.count + sum, 0)
 		)
-	}, [items.filter((item: { parentId: number }) => parentId === item.parentId)])
+	}, [
+		cartItems.filter((item: { parentId: number }) => parentId === item.parentId)
+	])
 
 	return (
 		<div className={s.pizza}>

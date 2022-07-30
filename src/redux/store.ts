@@ -11,3 +11,6 @@ export const store = configureStore({
 		pizzasSlice
 	}
 })
+
+// получение типа всего хранилища
+export type RootState = ReturnType<typeof store.getState>

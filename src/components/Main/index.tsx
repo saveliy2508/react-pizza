@@ -17,17 +17,20 @@ import {
 	setSortBy
 } from '../../redux/slices/filterSlice'
 import { fetchPizzas, setRenderItem } from '../../redux/slices/pizzasSlice'
-import { addPizzaCart } from '../../redux/slices/cartSlice'
+import { addPizzaCart, CartItem } from '../../redux/slices/cartSlice'
+import { RootState } from '../../redux/store'
 
-function Index() {
+const Index: React.FC = () => {
 	const navigate = useNavigate()
 
 	const dispatch = useDispatch()
 
-	const { items, renderItem } = useSelector(({ pizzasSlice }) => pizzasSlice)
-	const { isLoaded } = useSelector(({ pizzasSlice }) => pizzasSlice)
+	const { items, renderItem } = useSelector(
+		({ pizzasSlice }: RootState) => pizzasSlice
+	)
+	const { isLoaded } = useSelector(({ pizzasSlice }: RootState) => pizzasSlice)
 	const { category, sortBy, page, searchFilter } = useSelector(
-		({ filterSlice }) => filterSlice
+		({ filterSlice }: RootState) => filterSlice
 	)
 
 	React.useEffect(() => {
@@ -36,7 +39,7 @@ function Index() {
 
 	React.useEffect(() => {
 		if (window.location.search) {
-			const params = qs.parse(window.location.search.substring(1))
+			const params: any = qs.parse(window.location.search.substring(1))
 			dispatch(setFilters(params))
 		}
 	}, [])
@@ -68,13 +71,13 @@ function Index() {
 		'Закрытые'
 	]
 
-	const subMenu = [
+	const subMenu: { name: string }[] = [
 		{ name: 'популярности' },
 		{ name: 'цене' },
 		{ name: 'алфавиту' }
 	]
 
-	const onSortButton = (index) => {
+	const onSortButton = (index: number) => {
 		dispatch(setCategory(index))
 		dispatch(setPage(0))
 	}
@@ -85,7 +88,8 @@ function Index() {
 		setIsSubMenu(!isSubMenu)
 	}
 
-	const onActiveSubMenu = (index) => {
+	const onActiveSubMenu = (index: number) => {
+		// @ts-ignore
 		dispatch(setSortBy(subMenu[index].name))
 		setIsSubMenu(false)
 	}
@@ -98,7 +102,7 @@ function Index() {
 		}
 	}
 
-	const onAddCartItem = (newItem) => {
+	const onAddCartItem = (newItem: CartItem) => {
 		dispatch(
 			addPizzaCart({
 				parentId: newItem.parentId,
