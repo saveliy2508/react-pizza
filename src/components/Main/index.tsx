@@ -15,10 +15,13 @@ import {
 	setPage,
 	setSearchFilter,
 	setSortBy
-} from '../../redux/slices/filterSlice'
-import { fetchPizzas, setRenderItem } from '../../redux/slices/pizzasSlice'
-import { addPizzaCart, CartItem } from '../../redux/slices/cartSlice'
+} from '../../redux/slices/filter/slice'
+import { setRenderItem } from '../../redux/slices/pizzas/slice'
+import { addPizzaCart } from '../../redux/slices/cart/slice'
 import { RootState } from '../../redux/store'
+import { SortByTypes } from '../../redux/slices/filter/types'
+import { CartItem } from '../../redux/slices/cart/types'
+import { fetchPizzas } from '../../redux/slices/pizzas/asyncActions'
 
 const Index: React.FC = () => {
 	const navigate = useNavigate()
@@ -71,7 +74,7 @@ const Index: React.FC = () => {
 		'Закрытые'
 	]
 
-	const subMenu: { name: string }[] = [
+	const subMenu: { name: any }[] = [
 		{ name: 'популярности' },
 		{ name: 'цене' },
 		{ name: 'алфавиту' }
@@ -82,21 +85,21 @@ const Index: React.FC = () => {
 		dispatch(setPage(0))
 	}
 
-	const [isSubMenu, setIsSubMenu] = React.useState(false)
+	const [isSubMenu, setIsSubMenu] = React.useState<boolean>(false)
 
 	const toggleSubMenu = () => {
 		setIsSubMenu(!isSubMenu)
 	}
 
 	const onActiveSubMenu = (index: number) => {
-		// @ts-ignore
-		dispatch(setSortBy(subMenu[index].name))
+		const name: SortByTypes = subMenu[index].name
+		dispatch(setSortBy(name))
 		setIsSubMenu(false)
 	}
 
-	const sortRef = React.useRef()
+	const sortRef = React.useRef<HTMLDivElement>(null)
 
-	const handleOutsideClick = (e) => {
+	const handleOutsideClick = (e: any) => {
 		if (!e.path.includes(sortRef.current)) {
 			setIsSubMenu(false)
 		}
@@ -121,8 +124,12 @@ const Index: React.FC = () => {
 		400
 	)
 
-	const handleClearSearchInput = (e) => {
-		e.target.previousSibling.value = ''
+	const handleClearSearchInput = (
+		e: React.MouseEvent<HTMLDivElement, MouseEvent>
+	) => {
+		const target = e.target as HTMLDivElement
+		const prevSub = target.previousSibling as HTMLInputElement
+		prevSub.value = ''
 		dispatch(setSearchFilter(''))
 	}
 

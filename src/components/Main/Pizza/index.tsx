@@ -10,7 +10,7 @@ type MainPageProps = {
 	sizes: [number]
 	imageUrl: string
 	price: number
-	onAddCartItem: (cardData: {}) => void
+	onAddCartItem: (cardData: any) => void
 	name: string
 	parentId: number
 }
@@ -51,7 +51,6 @@ const Index: React.FC<MainPageProps> = ({
 		imageUrl,
 		name,
 		price,
-		onAddCartItem,
 		activeType: activeType,
 		activeSize: activeSize
 	}

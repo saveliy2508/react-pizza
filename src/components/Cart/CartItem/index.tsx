@@ -8,7 +8,8 @@ import {
 	clearPizzas,
 	decrementPizza,
 	incrementPizza
-} from '../../../redux/slices/cartSlice'
+} from '../../../redux/slices/cart/slice'
+import { CartItem } from '../../../redux/slices/cart/types'
 
 type CartItemProps = {
 	parentId: number
@@ -35,13 +36,12 @@ const Index: React.FC<CartItemProps> = ({
 
 	const handleClearPizzas = () => {
 		const cartItemIndex = cartItems.indexOf(
-			// @ts-ignore
 			cartItems.find(
-				(item) =>
+				(item: CartItem) =>
 					item.parentId === parentId &&
 					item.activeType === activeType &&
 					item.activeSize === activeSize
-			)
+			)!
 		)
 		dispatch(clearPizzas(cartItemIndex))
 	}
@@ -50,13 +50,12 @@ const Index: React.FC<CartItemProps> = ({
 		dispatch(
 			incrementPizza(
 				cartItems.indexOf(
-					//@ts-ignore
 					cartItems.find(
 						(item) =>
 							item.parentId === parentId &&
 							item.activeType === activeType &&
 							item.activeSize === activeSize
-					)
+					)!
 				)
 			)
 		)
@@ -66,13 +65,12 @@ const Index: React.FC<CartItemProps> = ({
 		dispatch(
 			decrementPizza(
 				cartItems.indexOf(
-					//@ts-ignore
 					cartItems.find(
 						(item) =>
 							item.parentId === parentId &&
 							item.activeType === activeType &&
 							item.activeSize === activeSize
-					)
+					)!
 				)
 			)
 		)

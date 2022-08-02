@@ -6,11 +6,21 @@ import s from './header.module.scss'
 import { RootState } from '../../redux/store'
 
 const Index: React.FC = () => {
-	const { totalItems, totalPrice } = useSelector(
+	const { cartItems, totalItems, totalPrice } = useSelector(
 		({ cartSlice }: RootState) => cartSlice
 	)
 
 	const location = useLocation()
+
+	let isMounted = React.useRef(false)
+
+	React.useEffect(() => {
+		if (isMounted.current) {
+			const json = JSON.stringify({ cartItems, totalItems, totalPrice })
+			localStorage.setItem('cart', json)
+		}
+		isMounted.current = true
+	}, [cartItems])
 
 	return (
 		<header className={s.header}>

@@ -6,7 +6,7 @@ import s from './cart.module.scss'
 
 import CartItem from './CartItem'
 
-import { clearAllPizzas } from '../../redux/slices/cartSlice'
+import { clearAllPizzas } from '../../redux/slices/cart/slice'
 import { RootState } from '../../redux/store'
 
 const Cart: React.FC = () => {

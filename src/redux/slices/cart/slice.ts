@@ -1,28 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getCartFromLS } from '../../../utils/getCartFromLS'
+import { CartItem, CartSliceState } from './types'
 
-export type CartItem = {
-	parentId: number
-	name: string
-	price: number
-	imageUrl: string
-	activeType: number
-	activeSize: number
-	count: number
-}
-
-interface CartSliceState {
-	cartItems: CartItem[]
-	totalPrice: number
-	totalItems: number
-}
+//достаю данные из localStorage
+const cartData = getCartFromLS()
 
 const initialState: CartSliceState = {
-	cartItems: [],
-	totalItems: 0,
-	totalPrice: 0
+	cartItems: cartData.cartItems,
+	totalItems: cartData.totalItems,
+	totalPrice: cartData.totalPrice
 }
 
-export const cartSlice = createSlice({
+export const slice = createSlice({
 	name: 'cart',
 	initialState,
 	reducers: {
@@ -41,13 +30,12 @@ export const cartSlice = createSlice({
 			} else {
 				state.cartItems[
 					state.cartItems.indexOf(
-						//@ts-ignore
 						state.cartItems.find(
-							(item: CartItem) =>
+							(item) =>
 								action.payload.parentId === item.parentId &&
 								action.payload.activeType === item.activeType &&
 								action.payload.activeSize === item.activeSize
-						)
+						)!
 					)
 				].count++
 				state.totalItems = state.totalItems + 1
@@ -98,6 +86,6 @@ export const {
 	clearPizzas,
 	incrementPizza,
 	decrementPizza
-} = cartSlice.actions
+} = slice.actions
 
-export default cartSlice.reducer
+export default slice.reducer

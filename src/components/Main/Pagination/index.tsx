@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import s from './pagination.module.scss'
 
-import { setPage } from '../../../redux/slices/filterSlice'
+import { setPage } from '../../../redux/slices/filter/slice'
 import { RootState } from '../../../redux/store'
 
 const Index: React.FC = () => {

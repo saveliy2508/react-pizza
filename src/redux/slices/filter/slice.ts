@@ -1,17 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-enum SortByTypes {
-	POPULAR = 'популярности',
-	PRICE = 'цене',
-	ALPHABET = 'алфавиту'
-}
-
-interface FilterSliceState {
-	category: number
-	sortBy: SortByTypes
-	page: number
-	searchFilter: string
-}
+import { FilterSliceState, SortByTypes } from './types'
 
 const initialState: FilterSliceState = {
 	category: 0,
@@ -20,7 +8,7 @@ const initialState: FilterSliceState = {
 	searchFilter: ''
 }
 
-export const filterSlice = createSlice({
+export const slice = createSlice({
 	name: 'filters',
 	initialState,
 	reducers: {
@@ -50,6 +38,6 @@ export const filterSlice = createSlice({
 })
 
 export const { setCategory, setSortBy, setPage, setFilters, setSearchFilter } =
-	filterSlice.actions
+	slice.actions
 
-export default filterSlice.reducer
+export default slice.reducer
