@@ -13,8 +13,8 @@ function App() {
 			<div className={s.wrapper}>
 				<Header />
 				<Routes>
-					<Route path="/main" element={<Main />} />
-					<Route path="/cart" element={<Cart />} />
+					<Route path="react-pizza/main" element={<Main />} />
+					<Route path="react-pizza/cart" element={<Cart />} />
 				</Routes>
 			</div>
 		</div>

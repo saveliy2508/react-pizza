@@ -106,7 +106,10 @@ const Index: React.FC<MainPageProps> = ({
 					className={classNames(s.addButton)}
 					onClick={() => onAddCartItem(cartData)}
 				>
-					<img src="./img/plusOrange.svg" alt="добавить" />
+					<img
+						src="https://saveliy2508.github.io/react-pizza/img/plusOrange.svg"
+						alt="добавить"
+					/>
 					Добавить {counter !== 0 && <span>{counter}</span>}
 				</div>
 			</div>

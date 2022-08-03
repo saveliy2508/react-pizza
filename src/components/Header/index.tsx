@@ -25,21 +25,29 @@ const Index: React.FC = () => {
 
 	return (
 		<header className={s.header}>
-			<NavLink to="/main">
+			<NavLink to="react-pizza/main">
 				<div className={s.headerLeft}>
-					<img className={s.logo} src="./img/logo.svg" alt="logo" />
+					<img
+						className={s.logo}
+						src="https://saveliy2508.github.io/react-pizza/img/logo.svg"
+						alt="logo"
+					/>
 					<div className={s.title}>REACT PIZZA</div>
 					<div className={s.slogan}>самая вкусная пицца во вселенной</div>
 				</div>
 			</NavLink>
 
 			{location.pathname !== '/cart' && (
-				<NavLink to="/cart">
+				<NavLink to="react-pizza/cart">
 					<div className={s.headerRight}>
 						<div className={s.leftPart}>{totalPrice} ₽</div>
 						<div className={s.border}></div>
 						<div className={s.rightPart}>
-							<img className={s.cart} src="./img/cart.svg" alt="cart" />
+							<img
+								className={s.cart}
+								src="https://saveliy2508.github.io/react-pizza/img/cart.svg"
+								alt="cart"
+							/>
 							{totalItems}
 						</div>
 					</div>

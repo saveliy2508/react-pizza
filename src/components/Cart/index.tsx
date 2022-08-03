@@ -30,11 +30,18 @@ const Cart: React.FC = () => {
 				<div className={s.CartItems}>
 					<div className={s.header}>
 						<div className={s.headerLeft}>
-							<img src="./img/blackCart.png" alt="корзина" /> Корзина
+							<img
+								src="https://saveliy2508.github.io/react-pizza/img/blackCart.png"
+								alt="корзина"
+							/>{' '}
+							Корзина
 						</div>
 						<div className={s.headerRight}>
 							<span onClick={() => dispatch(clearAllPizzas())}>
-								<img src="./img/trashCart.svg" alt="очистка" />
+								<img
+									src="https://saveliy2508.github.io/react-pizza/img/trashCart.svg"
+									alt="очистка"
+								/>
 								<span className={s.text}>Очистить корзину</span>
 							</span>
 						</div>
@@ -66,7 +73,7 @@ const Cart: React.FC = () => {
 							<button className={s.back} onClick={() => navigate(-1)}>
 								<img
 									className={s.arrowBack}
-									src="./img/arrowBack.svg"
+									src="https://saveliy2508.github.io/react-pizza/img/arrowBack.svg"
 									alt="arrowBack"
 								/>{' '}
 								Вернуться назад
@@ -82,7 +89,11 @@ const Cart: React.FC = () => {
 					<div className={s.emptyCart}>
 						<div className={s.title}>
 							Корзина пустая{' '}
-							<img src="./img/smile.svg" alt="smile" className={s.smile} />
+							<img
+								src="https://saveliy2508.github.io/react-pizza/img/smile.svg"
+								alt="smile"
+								className={s.smile}
+							/>
 						</div>
 						<div className={s.text}>
 							Вероятней всего, вы не заказывали ещё пиццу. Для того, чтобы
@@ -90,7 +101,7 @@ const Cart: React.FC = () => {
 						</div>
 						<img
 							className={s.cartImage}
-							src="./img/emptyCart.jpg"
+							src="https://saveliy2508.github.io/react-pizza/img/emptyCart.jpg"
 							alt="emptyCart"
 						/>
 						<div className={s.button} onClick={() => navigate(-1)}>

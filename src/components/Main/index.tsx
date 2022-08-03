@@ -150,7 +150,10 @@ const Index: React.FC = () => {
 				</div>
 				<div className={s.sortingRight} ref={sortRef}>
 					<div className={s.menu} onClick={toggleSubMenu}>
-						<img src="./img/arrowTop.svg" alt="arrow" />
+						<img
+							src="https://saveliy2508.github.io/react-pizza/img/arrowTop.svg"
+							alt="arrow"
+						/>
 						<p>Сортировка по:</p>
 						<p>
 							<span>{sortBy}</span>
