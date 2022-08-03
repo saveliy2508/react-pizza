@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { useSelector } from 'react-redux'
 
 import s from './pizza.module.scss'
+
 import { RootState } from '../../../redux/store'
 
 type MainPageProps = {

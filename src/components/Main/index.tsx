@@ -5,10 +5,12 @@ import qs from 'qs'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Pagination from './Pagination'
+
 import s from './main.module.scss'
 
 import Pizza from './Pizza'
 
+import { RootState } from '../../redux/store'
 import {
 	setCategory,
 	setFilters,
@@ -18,7 +20,6 @@ import {
 } from '../../redux/slices/filter/slice'
 import { setRenderItem } from '../../redux/slices/pizzas/slice'
 import { addPizzaCart } from '../../redux/slices/cart/slice'
-import { RootState } from '../../redux/store'
 import { SortByTypes } from '../../redux/slices/filter/types'
 import { CartItem } from '../../redux/slices/cart/types'
 import { fetchPizzas } from '../../redux/slices/pizzas/asyncActions'
@@ -37,14 +38,14 @@ const Index: React.FC = () => {
 	)
 
 	React.useEffect(() => {
-		document.body.addEventListener('click', handleOutsideClick)
-	}, [])
-
-	React.useEffect(() => {
+		// 1
 		if (window.location.search) {
 			const params: any = qs.parse(window.location.search.substring(1))
 			dispatch(setFilters(params))
 		}
+
+		// 2
+		document.body.addEventListener('click', handleOutsideClick)
 	}, [])
 
 	React.useEffect(() => {
