@@ -13,7 +13,7 @@ function App() {
 			<div className={s.wrapper}>
 				<Header />
 				<Routes>
-					<Route path="/main" element={<Main />} />
+					<Route path="/" element={<Main />} />
 					<Route path="/cart" element={<Cart />} />
 				</Routes>
 			</div>

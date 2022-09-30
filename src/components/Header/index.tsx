@@ -25,7 +25,7 @@ const Index: React.FC = () => {
 
 	return (
 		<header className={s.header}>
-			<NavLink to="/main">
+			<NavLink to="/">
 				<div className={s.headerLeft}>
 					<img className={s.logo} src="./img/logo.svg" alt="logo" />
 					<div className={s.title}>REACT PIZZA</div>
